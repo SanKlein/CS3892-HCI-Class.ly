@@ -1,0 +1,20 @@
+<ion-view title="New Course">
+  <ion-header-bar class="bar">
+    <div class="button button-clear">
+      <a class="button ion-ios-arrow-back button-clear" ui-sref="addCourse"></a>
+    </div>
+    <h1 class="title">New Course</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <form ng-submit="createNewCourse()">
+        <label class="item item-input">
+          <input type="text" placeholder="Course Title" ng-model="newCourse.title" autofocus>
+        </label>
+        <button class="button button-block button-stable" ng-click="createNewCourse()" ng-disabled="!newCourse.title" type="submit"> <!-- ui-sref="tab.entry" -->
+          Create
+        </button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>
