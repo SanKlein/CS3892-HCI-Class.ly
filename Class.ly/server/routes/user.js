@@ -1,5 +1,5 @@
 var mongoose = require("mongoose"),
-    User = require('../models/user');
+    User = mongoose.model('User');
 
 module.exports = {
 
@@ -40,5 +40,10 @@ module.exports = {
       console.log("no credentials submitted");
       res.send("fail", 500);
     }
+  },
+
+  getStudents: function (req, res) {
+    var students = req.body.students;
+
   }
 };

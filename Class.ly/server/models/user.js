@@ -5,9 +5,6 @@ var User = new mongoose.Schema({
     type: String,
     unique: true,
     trim: true
-  },
-  school: {
-    type: String
   }
 });
 

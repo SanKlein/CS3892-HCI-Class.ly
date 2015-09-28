@@ -45,7 +45,7 @@ angular.module('classly.services', [])
       getAllCourses: function() {
         var deferred = $q.defer();
 
-        $http.get(base + '/course/all')
+        $http.post(base + '/course/all')
           .success(function (courses) {
             deferred.resolve(courses);
           })
@@ -60,7 +60,7 @@ angular.module('classly.services', [])
       getMyCourses: function(user) {
         var deferred = $q.defer();
 
-        $http.get(base + '/course/my', user)
+        $http.post(base + '/course/my', user)
           .success(function (courses) {
             deferred.resolve(courses);
           })
@@ -70,21 +70,12 @@ angular.module('classly.services', [])
         ;
 
         return deferred.promise;
-      },
-
-      add : function(course) {
-        var deferred = $q.defer();
-
-        $http.post(base + '/course/add', course)
-          .success(function (course) {
-            deferred.resolve(course);
-          })
-          .error(function(err) {
-            deferred.reject(err);
-          })
-        ;
-
-        return deferred.promise;
       }
     }
+}])
+
+.factory('GroupFactory', ['$q', '$http', function($q, $http) {
+  return {
+
+  }
 }]);

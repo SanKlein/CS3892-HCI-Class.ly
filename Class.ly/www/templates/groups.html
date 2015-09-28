@@ -1,0 +1,20 @@
+<ion-view view-title="Groups">
+  <ion-header-bar class="bar bar-stable">
+    <div side="left">
+      <button class="button button-dark button-clear ion-navicon-round"></button>
+    </div>
+    <h1 class="title">{{currentCourse.title}}</h1>
+    <a class="button button-clear" side="right" href="/#/add/course">
+      <button class="button button-dark ion-plus-round button-clear"></button>
+    </a>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <a ng-repeat="group in groups track by $index" ng-click="loadGroup(group, $index)" href="#/tab/chat">
+        <div class="item item-text-wrap">
+          {{group.title}}
+        </div>
+      </a>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,9 +1,12 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    User = require('./user'),
+    Course = require('./course');
 
 var Group = new mongoose.Schema({
   students: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: 'User'
+    ref: 'User',
+    default: []
   },
   course: {
     type: mongoose.Schema.Types.ObjectId,

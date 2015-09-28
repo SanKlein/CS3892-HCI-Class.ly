@@ -4,14 +4,11 @@
       <button class="button button-dark button-clear ion-navicon-round"></button>
     </div>
     <h1 class="title">My Courses</h1>
-    <a class="button button-clear" side="right" href="/#/add/course">
-      <button class="button button-dark ion-plus-round button-clear"></button>
-    </a>
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <a ng-repeat="course in courses track by $index" ng-click="loadCourse(course)" href="#/tab/chat">
-        <div class="item item-text-wrap">
+      <a ng-repeat="course in courses track by $index" ng-click="loadCourse(course)" href="#/groups">
+        <div class="item item-text-wrap item-course">
           {{course.title}}
         </div>
       </a>

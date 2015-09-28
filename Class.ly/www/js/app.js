@@ -43,17 +43,11 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
         controller: 'CourseCtrl'
     })
 
-    .state('addCourse', {
-        url: '/add/course',
-        templateUrl: '/templates/addCourse.html',
-        controller: 'AddCourseCtrl'
-    })
-
-    .state('addNewCourse', {
-        url: '/add/course/new',
-        templateUrl: 'templates/newCourse.html',
-        controller: 'NewCourseCtrl'
-    })
+      .state('groups', {
+        url: '/groups',
+        templateUrl: 'templates/groups.html',
+        controller: 'GroupCtrl'
+      })
 
     // setup an abstract state for the tabs directive
         .state('tab', {
@@ -73,27 +67,6 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
             }
         }
     })
-
-    .state('tab.groups', {
-        url: '/groups',
-        views: {
-            'tab-chats': {
-                templateUrl: 'templates/tab-groups.html',
-                controller: 'GroupsCtrl'
-            }
-        }
-      })
-      /*
-      .state('tab.chat-detail', {
-        url: '/chats/:chatId',
-        views: {
-          'tab-chats': {
-            templateUrl: 'templates/chat-detail.html',
-            controller: 'ChatDetailCtrl'
-          }
-        }
-      })
-      */
 
     .state('tab.meetups', {
         url: '/meetups',

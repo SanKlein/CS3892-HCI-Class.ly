@@ -12,11 +12,9 @@ module.exports = function(app) {
 
   app.post('/course/create', course.create);
 
-  app.get('/course/all', course.all);
+  app.post('/course/all', course.all);
 
-  app.get('/course/my', course.my);
-
-  app.post('/course/add', course.add);
+  app.post('/course/my', course.my);
 
 
 

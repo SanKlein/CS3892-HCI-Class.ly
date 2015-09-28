@@ -5,7 +5,7 @@ angular.module('classly.controllers', [])
       }
   ])
 
-  .controller('LoginCtrl', ['$rootScope', '$scope', 'UserFactory', '$window', '$location', function($rootScope, $scope, UserFactory, $window, $location) {
+  .controller('LoginCtrl', ['$rootScope', '$scope', 'UserFactory', '$window', function($rootScope, $scope, UserFactory, $window) {
 
       $scope.user = {
           username: '',
@@ -13,12 +13,15 @@ angular.module('classly.controllers', [])
       };
 
       $scope.login = function() {
+          var username = $scope.user.username;
+          username = username.toLowerCase();
+          username = username.charAt(0).toUpperCase() + username.slice(1);
+          $scope.user.username = username;
+
           UserFactory.login($scope.user).then(function(user) {
 
               console.log(user);
-
               $rootScope.currentUser = user; // used to keep track of current user
-              $rootScope.currentUser.username = $rootScope.currentUser.username.charAt(0).toUpperCase() + $rootScope.currentUser.username.slice(1);
 
               $window.location.assign('#/courses');
 
@@ -27,8 +30,8 @@ angular.module('classly.controllers', [])
 
   }])
 
-  .controller('CourseCtrl', ['$rootScope', '$scope', 'CourseFactory', function($rootScope, $scope, CourseFactory) {
-      $scope.courses = [];
+  .controller('CourseCtrl', ['$rootScope', '$scope', 'CourseFactory', '$window', function($rootScope, $scope, CourseFactory, $window) {
+    $scope.courses = [];
 
     CourseFactory.getMyCourses($rootScope.currentUser).then(function(courses) {
       if (courses.length) {
@@ -38,43 +41,17 @@ angular.module('classly.controllers', [])
 
       $scope.loadCourse = function(course) {
         $rootScope.currentCourse = course;
-        $window.location.assign('#/tab/chat');
+        $window.location.assign('#/groups');
       }
   }])
 
-  .controller('AddCourseCtrl', ['$rootScope', '$scope', 'CourseFactory', function($rootScope, $scope, CourseFactory) {
+  .controller('GroupCtrl', ['$rootScope', '$scope', 'GroupFactory', '$window', function($rootScope, $scope, GroupFactory, $window) {
+    $scope.groups = [];
 
-      $scope.courses = [];
+    $rootScope.currentCourse.user = $rootScope.currentUser._id;
 
-      CourseFactory.getAllCourses().then(function(courses) {
-        if (courses.length) {
-          $scope.courses = courses;
-        }
-      });
-
-    $scope.addCourse = function(course) {
-      course.user = $rootScope.currentUser._id;
-      CourseFactory.add(course).then(function(course) {
-        console.log('course added');
-      })
-    };
-
+    GroupFactory.getMyGroups($rootScope.currentCourse).then(function(){});
   }])
-
-  .controller('NewCourseCtrl', ['$scope', '$rootScope', 'CourseFactory', '$location', '$window',
-    function($scope, $rootScope, CourseFactory, $location, $window) {
-
-      $scope.newCourse = {
-        title: ''
-      };
-
-      $scope.createNewCourse = function() {
-        CourseFactory.create($scope.newCourse).then(function(course) {
-          $window.location.assign('#/add/course');
-        });
-      };
-    }
-  ])
 
   .controller('ChatCtrl', function($scope, Chats) {
     // With the new view caching in Ionic, Controllers are only called
@@ -89,10 +66,6 @@ angular.module('classly.controllers', [])
       $scope.remove = function(chat) {
           Chats.remove(chat);
       };
-  })
-
-  .controller('GroupsCtrl', function($scope, $stateParams, Chats) {
-      $scope.chat = Chats.get($stateParams.chatId);
   })
 
   .controller('MeetupCtrl', function($scope) {

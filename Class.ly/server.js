@@ -21,6 +21,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/www'));
 
+/*var User = require('./server/models/user');
+var Course = require('./server/models/course');
+var Group = require('./server/models/group');
+var Message = require('./server/models/message');
+var Meetup = require('./server/models/meetup');
+*/
+
 require('./server/routes')(app);
 
 app.listen(port, function() {
