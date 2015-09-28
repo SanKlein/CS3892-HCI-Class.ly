@@ -1,0 +1,17 @@
+<ion-view view-title="Courses"> <!--ng-controller="UserCtrl"-->
+  <ion-header-bar class="bar bar-stable">
+    <div side="left">
+      <button class="button button-dark button-clear ion-navicon-round"></button>
+    </div>
+    <h1 class="title">My Courses</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <a ng-repeat="course in courses track by $index" ng-click="loadCourse(course)" href="#/groups">
+        <div class="item item-text-wrap item-course">
+          {{course.title}}
+        </div>
+      </a>
+    </ion-list>
+  </ion-content>
+</ion-view>
