@@ -1,0 +1,17 @@
+<ion-view view-title="Meetups">
+  <ion-header-bar class="bar-stable header-bottom">
+    <div class="button button-clear">
+      <a class="button button-dark button-clear ion-chevron-left" ui-sref="groups"></a>
+    </div>
+    <h1 class="title">{{currentGroup.title}} Meetups</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="message in messages" type="item-text-wrap">
+        <h2>{{message.user}}</h2>
+        <p>{{message.text}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+

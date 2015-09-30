@@ -1,6 +1,16 @@
 angular.module('classly.controllers', [])
 
-  .controller('ClasslyCtrl', ['$rootScope', function($rootScope) {
+  .controller('ClasslyCtrl', ['$rootScope', '$ionicSideMenuDelegate', '$window', function($rootScope, $ionicSideMenuDelegate, $window) {
+
+        $rootScope.logout = function() {
+          $rootScope.currentUser = null;
+
+          $window.location.assign('#/login');
+        };
+
+        $rootScope.openMenu = function () {
+          $ionicSideMenuDelegate.toggleLeft();
+        };
 
       }
   ])
@@ -19,18 +29,15 @@ angular.module('classly.controllers', [])
           $scope.user.username = username;
 
           UserFactory.login($scope.user).then(function(user) {
-
-              console.log(user);
               $rootScope.currentUser = user; // used to keep track of current user
 
               $window.location.assign('#/courses');
-
           });
       };
 
   }])
 
-  .controller('CourseCtrl', ['$rootScope', '$scope', 'CourseFactory', '$window', function($rootScope, $scope, CourseFactory, $window) {
+  .controller('CourseCtrl', ['$rootScope', '$scope', 'CourseFactory', '$window', '$ionicListDelegate', function($rootScope, $scope, CourseFactory, $window, $ionicListDelegate) {
     $scope.courses = [];
 
     CourseFactory.getMyCourses($rootScope.currentUser).then(function(courses) {
@@ -39,35 +46,80 @@ angular.module('classly.controllers', [])
       }
     });
 
-      $scope.loadCourse = function(course) {
-        $rootScope.currentCourse = course;
-        $window.location.assign('#/groups');
-      }
+    $scope.loadCourse = function(course) {
+      $rootScope.currentCourse = course;
+      $window.location.assign('#/groups');
+    };
+
+    $scope.remove = function(post, index) {
+      $scope.courses.splice(index, 1);
+      $ionicListDelegate.closeOptionButtons();
+    };
   }])
 
-  .controller('GroupCtrl', ['$rootScope', '$scope', 'GroupFactory', '$window', function($rootScope, $scope, GroupFactory, $window) {
+  .controller('GroupCtrl', ['$rootScope', '$scope', 'GroupFactory', '$window', '$ionicListDelegate', function($rootScope, $scope, GroupFactory, $window, $ionicListDelegate) {
     $scope.groups = [];
 
     $rootScope.currentCourse.user = $rootScope.currentUser._id;
 
-    GroupFactory.getMyGroups($rootScope.currentCourse).then(function(){});
+    GroupFactory.getMyGroups($rootScope.currentCourse).then(function(groups) {
+      $scope.groups = groups;
+    });
+
+    $scope.loadGroup = function(group) {
+      $rootScope.currentGroup = group;
+      $window.location.assign('#/tab/chat');
+    };
+
+    $scope.remove = function(post, index) {
+      $scope.groups.splice(index, 1);
+      $ionicListDelegate.closeOptionButtons();
+    };
   }])
 
-  .controller('ChatCtrl', function($scope, Chats) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
+  .controller('ChatCtrl', ['$rootScope', '$scope', 'ChatFactory', '$window', function($rootScope, $scope, ChatFactory, $window) {
 
-      $scope.chats = Chats.all();
-      $scope.remove = function(chat) {
-          Chats.remove(chat);
+    $scope.chatroom = {
+      chats: [],
+      text: ''
+    };
+
+    ChatFactory.getChat().then(function(chats) {
+      if (chats.length) {
+        for (var i = 0; i < chats.length; i++) {
+          (function(index) {
+            chats[index].liked = false;
+            $scope.chatroom.chats.push(chats[index]);
+          })(i);
+        }
+      }
+    });
+
+    $scope.likeChat = function(chat, index) {
+      $scope.chatroom.chats[index].liked = !chat.liked;
+    };
+
+    $scope.addChat = function() {
+      var newChat = {
+        text: $scope.chatroom.text,
+        user_id: $rootScope.currentUser._id,
+        user_username: $rootScope.currentUser.username,
+        course : $rootScope.currentCourse._id,
+        group: $rootScope.currentGroup._id
       };
-  })
 
-  .controller('MeetupCtrl', function($scope) {
+      ChatFactory.create(newChat).then(function(chat) {
+        if ($scope.chatroom.chats) {
+          $scope.chatroom.chats.push(chat);
+        } else {
+          $scope.chatroom.chats = [chat];
+        }
+      });
 
-  });
+      $scope.chatroom.text = '';
+    };
+  }])
+
+  .controller('MeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', function($rootScope, $scope, MeetupFactory, $window) {
+
+  }]);

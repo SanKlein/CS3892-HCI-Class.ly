@@ -1,20 +1,23 @@
 <ion-view view-title="Groups">
   <ion-header-bar class="bar bar-stable">
-    <div side="left">
-      <button class="button button-dark button-clear ion-navicon-round"></button>
+    <div class="button button-clear">
+      <a class="button button-dark button-clear ion-chevron-left" ui-sref="courses"></a>
     </div>
     <h1 class="title">{{currentCourse.title}}</h1>
-    <a class="button button-clear" side="right" href="/#/add/course">
-      <button class="button button-dark ion-plus-round button-clear"></button>
+    <a class="button button-clear">
+      <button class="button button-dark ion-plus-round button-clear"></button> <!-- add new groups -->
     </a>
   </ion-header-bar>
   <ion-content>
-    <ion-list>
-      <a ng-repeat="group in groups track by $index" ng-click="loadGroup(group, $index)" href="#/tab/chat">
-        <div class="item item-text-wrap">
+    <ion-list can-swipe="true" show-delete="false">
+      <ion-item class="item-text-wrap item-course" ng-repeat="group in groups track by $index">
+        <a class="button button-clear button-dark" ng-click="loadGroup(group, $index)" href="#/tab/chat">
           {{group.title}}
-        </div>
-      </a>
+        </a>
+        <ion-option-button class="button-assertive" ng-click="remove(group, $index)">
+          Leave
+        </ion-option-button>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -77,5 +77,79 @@ angular.module('classly.services', [])
 .factory('GroupFactory', ['$q', '$http', function($q, $http) {
   return {
 
+    getMyGroups: function(course) {
+      var deferred = $q.defer();
+
+      $http.post(base + '/group/course', course)
+        .success(function(groups) {
+          deferred.resolve(groups);
+        })
+        .error(function(err) {
+          deferred.reject(err);
+        })
+      ;
+
+      return deferred.promise;
+    },
+
+
+  }
+}])
+
+.factory('ChatFactory', ['$q', '$http', function($q, $http) {
+  return {
+
+    create: function(chat) {
+      var deferred = $q.defer();
+
+      $http.post(base + '/chat/add', chat)
+        .success(function(message) {
+          deferred.resolve(message);
+        })
+        .error(function(err) {
+          deferred.reject(err);
+        })
+      ;
+
+      return deferred.promise;
+    },
+
+    getChat: function() {
+      var deferred = $q.defer();
+
+      $http.post(base + '/chat/all')
+        .success(function(chats) {
+          deferred.resolve(chats);
+        })
+        .error(function(err) {
+          deferred.reject(err);
+        })
+      ;
+
+      return deferred.promise;
+    }
+
+  }
+}])
+
+.factory('MeetupFactory', ['$q', '$http', function($q, $http) {
+  return {
+
+    getMyGroups: function(course) {
+      var deferred = $q.defer();
+
+      $http.post(base + '/group/course', course)
+        .success(function(groups) {
+          deferred.resolve(groups);
+        })
+        .error(function(err) {
+          deferred.reject(err);
+        })
+      ;
+
+      return deferred.promise;
+    },
+
+
   }
 }]);

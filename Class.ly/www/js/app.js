@@ -38,12 +38,14 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
     })
 
     .state('courses', {
+        cache: false,
         url: '/courses',
         templateUrl: 'templates/courses.html',
         controller: 'CourseCtrl'
     })
 
       .state('groups', {
+        cache: false,
         url: '/groups',
         templateUrl: 'templates/groups.html',
         controller: 'GroupCtrl'
@@ -59,9 +61,10 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
     // Each tab has its own nav history stack:
 
     .state('tab.chat', {
+        cache: false,
         url: '/chat',
         views: {
-            'tab-dash': {
+            'tab-chat': {
                 templateUrl: 'templates/tab-chat.html',
                 controller: 'ChatCtrl'
             }
@@ -69,9 +72,10 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
     })
 
     .state('tab.meetups', {
+        cache: false,
         url: '/meetups',
         views: {
-            'tab-account': {
+            'tab-meetups': {
                 templateUrl: 'templates/tab-meetups.html',
                 controller: 'MeetupCtrl'
             }

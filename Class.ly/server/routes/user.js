@@ -14,13 +14,13 @@ module.exports = {
   login: function (req, res) {
 
     var username = req.body.username;
-    username = username.toLowerCase();
 
     if (username) {
       User.findOne({username: username}, function (error, user) {
         if (error)
           console.log(error);
         if (user) {
+          console.log(user);
           res.json(user);
         } else {
           var user = new User();

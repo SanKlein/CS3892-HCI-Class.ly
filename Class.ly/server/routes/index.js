@@ -1,5 +1,7 @@
 var course = require('./course'),
-    user = require('./user');
+    user = require('./user'),
+    group = require('./group'),
+    chat = require('./chat');
 
 module.exports = function(app) {
 
@@ -16,7 +18,11 @@ module.exports = function(app) {
 
   app.post('/course/my', course.my);
 
+  app.post('/group/course', group.all);
 
+  app.post('/chat/add', chat.add);
+
+  app.post('/chat/all', chat.all);
 
 };
 

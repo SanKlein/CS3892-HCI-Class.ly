@@ -19,7 +19,7 @@ module.exports = {
   },
 
   all : function(req, res) {
-    Course.find().sort({title: -1}).exec(function(err, courses) {
+    Course.find().sort({title: 1}).exec(function(err, courses) {
       if (courses) {
         res.send(courses);
       } else {
@@ -30,7 +30,7 @@ module.exports = {
 
   my : function(req, res) {
     var id = req.body._id;
-    Course.find().sort({title: -1}).exec(function(err, courses) {
+    Course.find().sort({title: 1}).exec(function(err, courses) {
       if (courses) {
         res.send(courses);
       } else {
