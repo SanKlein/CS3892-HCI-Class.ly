@@ -1,0 +1,34 @@
+<ion-view view-title="AddMeetup">
+  <ion-header-bar class="bar bar-stable">
+    <div class="button button-clear">
+      <a class="button button-dark button-clear ion-chevron-left" ui-sref="meetups"></a>
+    </div>
+    <h1 class="title">New Meetup</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <label class="item item-input">
+        <span class="input-label">Date</span>
+        <input class="text-field" type="text" placeholder="MM/DD/YYYY" ng-model="meetup.date">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Time</span>
+        <input class="text-field" type="text" placeholder= "HH:MM" ng-model="meetup.time">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Location</span>
+        <input class="text-field" type="text" ng-model="meetup.location">
+      </label>
+      <ion-item class="item-divider item-course">
+        Add Classmates
+      </ion-item>
+      <ion-item class="item item-text-wrap item-button-right" ng-repeat="user in meetup.users track by $index">
+        {{user.username}}
+        <button class="button button-clear button-dark" ng-class="user.added ? 'ion-ios-checkmark-empty' : 'ion-ios-plus-empty'" ng-click="addUser(user, $index)"></button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <div class="bar bar-stable bar-footer footer-button">
+    <a class="button button-dark button-full button-clear" ng-click="createGroup()" ui-sref="tab.meetups" ng-disabled="!meetup.date || !meetup.time || !meetup.location">Create Meetup</a>
+  </div>
+</ion-view>

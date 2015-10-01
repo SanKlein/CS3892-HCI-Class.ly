@@ -1,0 +1,26 @@
+<ion-view view-title="AddGroup">
+  <ion-header-bar class="bar bar-stable">
+    <div class="button button-clear">
+      <a class="button button-dark button-clear ion-chevron-left" ui-sref="courses"></a>
+    </div>
+    <h1 class="title">New Group</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <label class="item item-input">
+        <span class="input-label">Name</span>
+        <input class="text-field" type="text" ng-model="group.title" autofocus>
+      </label>
+      <ion-item class="item-divider item-course">
+        Add Classmates
+      </ion-item>
+      <ion-item class="item item-text-wrap item-button-right" ng-repeat="user in group.users track by $index">
+        {{user.username}}
+        <button class="button button-clear button-dark" ng-class="user.added ? 'ion-ios-checkmark-empty' : 'ion-ios-plus-empty'" ng-click="addUser(user, $index)"></button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <div class="bar bar-stable bar-footer footer-button">
+    <a class="button button-dark button-full button-clear" ng-click="createGroup()" ui-sref="groups" ng-disabled="!group.title">Create Group</a>
+  </div>
+</ion-view>

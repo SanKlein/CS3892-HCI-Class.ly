@@ -57,6 +57,25 @@ angular.module('classly.controllers', [])
     };
   }])
 
+  .controller('AddCourseCtrl', ['$rootScope', '$scope', 'CourseFactory', '$window', function($rootScope, $scope, CourseFactory, $window) {
+    $scope.courses = [];
+
+    CourseFactory.getMyCourses($rootScope.currentUser).then(function(courses) {
+      if (courses) {
+        for (var i = 0; i < courses.length; i++) {
+          (function(index) {
+              courses[index].added = false;
+              $scope.courses.push(courses[index]);
+          })(i);
+        }
+      }
+    });
+
+    $scope.addCourse = function(course, index) {
+      $scope.courses[index].added = !course.added;
+    };
+  }])
+
   .controller('GroupCtrl', ['$rootScope', '$scope', 'GroupFactory', '$window', '$ionicListDelegate', function($rootScope, $scope, GroupFactory, $window, $ionicListDelegate) {
     $scope.groups = [];
 
@@ -74,6 +93,39 @@ angular.module('classly.controllers', [])
     $scope.remove = function(post, index) {
       $scope.groups.splice(index, 1);
       $ionicListDelegate.closeOptionButtons();
+    };
+  }])
+
+  .controller('AddGroupCtrl', ['$rootScope', '$scope', 'GroupFactory', '$window', 'UserFactory', function($rootScope, $scope, GroupFactory, $window, UserFactory) {
+    $scope.group = {
+      title: '',
+      users: []
+    };
+
+    UserFactory.all().then(function(users) {
+      if (users) {
+        for (var i = 0; i < users.length; i++) {
+          (function(index) {
+            users[index].added = false;
+            $scope.group.users.push(users[index]);
+          })(i);
+        }
+      }
+    });
+
+    $scope.addUser = function(user, index) {
+      $scope.group.users[index].added = !user.added;
+    };
+
+    $scope.createGroup = function() {
+      var group = {
+        title: $scope.group.title,
+        course: $rootScope.currentCourse._id
+      };
+
+      GroupFactory.create(group).then(function(group) {
+        $window.location.assign('#/groups');
+      });
     };
   }])
 
@@ -121,5 +173,52 @@ angular.module('classly.controllers', [])
   }])
 
   .controller('MeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', function($rootScope, $scope, MeetupFactory, $window) {
+    $scope.meetups = [];
 
+    MeetupFactory.all().then(function(meetups) {
+      console.log(meetups);
+      if (meetups) {
+        $scope.meetups = meetups;
+      }
+    });
+
+  }])
+
+  .controller('AddMeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', 'UserFactory', function($rootScope, $scope, GroupFactory, $window, UserFactory) {
+    $scope.meetup = {
+      date: '',
+      time: '',
+      location: '',
+      users: []
+    };
+
+    UserFactory.all().then(function(users) {
+      if (users) {
+        for (var i = 0; i < users.length; i++) {
+          (function(index) {
+            users[index].added = false;
+            $scope.meetup.users.push(users[index]);
+          })(i);
+        }
+      }
+    });
+
+    $scope.addUser = function(user, index) {
+      $scope.meetup.users[index].added = !user.added;
+    };
+
+    $scope.createMeetup = function() {
+      var meetup = {
+        date: $scope.meetup.date,
+        time: $scope.meetup.time,
+        location: $scope.meetup.location,
+        course: $rootScope.currentCourse._id,
+        group: $rootScope.currentGroup._id
+      };
+
+      MeetupFactory.create(meetup).then(function(group) {
+        $window.location.assign('#/tab/meetups');
+      });
+    };
   }]);
+

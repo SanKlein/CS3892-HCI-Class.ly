@@ -20,7 +20,6 @@ module.exports = {
         if (error)
           console.log(error);
         if (user) {
-          console.log(user);
           res.json(user);
         } else {
           var user = new User();
@@ -42,8 +41,13 @@ module.exports = {
     }
   },
 
-  getStudents: function (req, res) {
-    var students = req.body.students;
-
+  all: function (req, res) {
+    User.find().exec(function(err, users) {
+      if (users) {
+        res.send(users);
+      } else {
+        res.send(err);
+      }
+    })
   }
 };

@@ -19,6 +19,21 @@ angular.module('classly.services', [])
             ;
 
             return deferred.promise;
+        },
+
+        all: function() {
+          var deferred = $q.defer();
+
+          $http.post(base + '/users')
+            .success(function(users) {
+              deferred.resolve(users);
+            })
+            .error(function(err) {
+              deferred.reject(err);
+            })
+          ;
+
+          return deferred.promise;
         }
     }
 }])
@@ -92,6 +107,20 @@ angular.module('classly.services', [])
       return deferred.promise;
     },
 
+    create: function(group) {
+      var deferred = $q.defer();
+
+      $http.post(base + '/group/create', group)
+        .success(function(newGroup) {
+          deferred.reject(newGroup);
+        })
+        .error(function(err) {
+          deferred.reject(err);
+        })
+      ;
+
+      return deferred.promise;
+    }
 
   }
 }])
@@ -135,12 +164,12 @@ angular.module('classly.services', [])
 .factory('MeetupFactory', ['$q', '$http', function($q, $http) {
   return {
 
-    getMyGroups: function(course) {
+    all: function() {
       var deferred = $q.defer();
 
-      $http.post(base + '/group/course', course)
-        .success(function(groups) {
-          deferred.resolve(groups);
+      $http.post(base + '/meetups')
+        .success(function(meetups) {
+          deferred.resolve(meetups);
         })
         .error(function(err) {
           deferred.reject(err);
@@ -149,6 +178,21 @@ angular.module('classly.services', [])
 
       return deferred.promise;
     },
+
+    create: function(meetup) {
+      var deferred = $q.defer();
+
+      $http.post(base + '/meetups/create', meetup)
+        .success(function(meetup) {
+          deferred.resolve(meetup);
+        })
+        .error(function(err) {
+          deferred.reject(err);
+        })
+      ;
+
+      return deferred.promise;
+    }
 
 
   }

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
+angular.module('classly', ['ionic', 'classly.controllers', 'classly.services', 'ionic-datepicker', 'ionic-timepicker'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -44,12 +44,26 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
         controller: 'CourseCtrl'
     })
 
-      .state('groups', {
-        cache: false,
-        url: '/groups',
-        templateUrl: 'templates/groups.html',
-        controller: 'GroupCtrl'
-      })
+    .state('addCourses', {
+      cache: false,
+      url: '/courses/add',
+      templateUrl: 'templates/addCourses.html',
+      controller: 'AddCourseCtrl'
+    })
+
+    .state('groups', {
+      cache: false,
+      url: '/groups',
+      templateUrl: 'templates/groups.html',
+      controller: 'GroupCtrl'
+    })
+
+    .state('addGroup', {
+      cache: false,
+      url: '/groups/add',
+      templateUrl: 'templates/newGroup.html',
+      controller: 'AddGroupCtrl'
+    })
 
     // setup an abstract state for the tabs directive
         .state('tab', {
@@ -80,6 +94,13 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services'])
                 controller: 'MeetupCtrl'
             }
         }
+    })
+
+    .state('addMeetup', {
+      cache: false,
+      url: '/meetups/add',
+      templateUrl: 'templates/newMeetup.html',
+      controller: 'AddMeetupCtrl'
     });
 
     // if none of the above states are matched, use this as the fallback

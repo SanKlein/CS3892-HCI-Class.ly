@@ -4,14 +4,17 @@
       <a class="button button-dark button-clear ion-chevron-left" ui-sref="groups"></a>
     </div>
     <h1 class="title">{{currentGroup.title}} Meetups</h1>
+    <div class="button button-clear">
+      <a class="button button-dark button-clear ion-plus-round" ui-sref="addMeetup"></a>
+    </div>
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate" ng-repeat="message in messages" type="item-text-wrap">
-        <h2>{{message.user}}</h2>
-        <p>{{message.text}}</p>
-      </ion-item>
+      <ion-list>
+        <div class="item item-text-wrap" ng-repeat="meetup in meetups track by $index">
+          {{meetup.date}} {{meetup.time}} {{meetup.location}}
+        </div>
+      </ion-list>
     </ion-list>
   </ion-content>
 </ion-view>
-

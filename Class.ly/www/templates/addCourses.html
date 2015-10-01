@@ -1,0 +1,16 @@
+<ion-view view-title="AddCourses">
+  <ion-header-bar class="bar bar-stable">
+    <div class="button button-clear">
+      <a class="button button-dark button-clear ion-chevron-left" ui-sref="courses"></a>
+    </div>
+    <h1 class="title">Course List</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item item-text-wrap item-course item-button-right" ng-repeat="course in courses track by $index">
+        {{course.title}}
+        <button class="button button-clear button-dark" ng-class="course.added ? 'ion-ios-checkmark-empty' : 'ion-ios-plus-empty'" ng-click="addCourse(course, $index)"></button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

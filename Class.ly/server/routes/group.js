@@ -15,6 +15,22 @@ module.exports = {
         res.send(err, 404);
       }
     })
+  },
+
+  create: function(req, res) {
+
+    var group = new Group();
+
+    group.course = req.body.course;
+    group.title = req.body.title;
+
+    group.save(function(err){
+      if (!err) {
+        res.json(group);
+      } else {
+        res.send(err, 403);
+      }
+    });
   }
 
 };
