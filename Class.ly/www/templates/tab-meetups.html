@@ -1,18 +1,18 @@
 <ion-view view-title="Meetups">
-  <ion-header-bar class="bar-stable header-bottom">
+  <ion-header-bar class="bar-positive header-bottom">
     <div class="button button-clear">
-      <a class="button button-dark button-clear ion-chevron-left" ui-sref="groups"></a>
+      <a class="button button-clear ion-chevron-left" ui-sref="groups"></a>
     </div>
     <h1 class="title">{{currentGroup.title}} Meetups</h1>
     <div class="button button-clear">
-      <a class="button button-dark button-clear ion-plus-round" ui-sref="addMeetup"></a>
+      <a class="button button-clear ion-plus-round" ui-sref="addMeetup"></a>
     </div>
   </ion-header-bar>
   <ion-content>
     <ion-list>
       <ion-list>
         <div class="item item-text-wrap" ng-repeat="meetup in meetups track by $index">
-          {{meetup.date}} {{meetup.time}} {{meetup.location}}
+          {{meetup.location}}  {{meetup.date}}  {{meetup.time}}
         </div>
       </ion-list>
     </ion-list>

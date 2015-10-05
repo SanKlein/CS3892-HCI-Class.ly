@@ -1,7 +1,7 @@
 <ion-view view-title="AddMeetup">
-  <ion-header-bar class="bar bar-stable">
+  <ion-header-bar class="bar bar-positive">
     <div class="button button-clear">
-      <a class="button button-dark button-clear ion-chevron-left" ui-sref="meetups"></a>
+      <a class="button button-clear ion-chevron-left" ui-sref="tab.meetups"></a>
     </div>
     <h1 class="title">New Meetup</h1>
   </ion-header-bar>
@@ -28,7 +28,7 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <div class="bar bar-stable bar-footer footer-button">
-    <a class="button button-dark button-full button-clear" ng-click="createGroup()" ui-sref="tab.meetups" ng-disabled="!meetup.date || !meetup.time || !meetup.location">Create Meetup</a>
+  <div class="bar bar-positive bar-footer footer-button">
+    <a class="button button-full button-clear" ng-click="createMeetup()" ui-sref="tab.meetups" ng-disabled="!meetup.date || !meetup.time || !meetup.location">Create Meetup</a>
   </div>
 </ion-view>

@@ -182,6 +182,9 @@ angular.module('classly.services', [])
     create: function(meetup) {
       var deferred = $q.defer();
 
+      console.log('meet up in factory');
+      console.log(meetup);
+
       $http.post(base + '/meetups/create', meetup)
         .success(function(meetup) {
           deferred.resolve(meetup);

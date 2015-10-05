@@ -10,3 +10,18 @@ div.footer-button a.button.button-full {
   width:100%;
   margin-top: 0
 }
+
+.feed-toggle {
+  float:right;
+}
+
+.button.button-block {
+  margin:0;
+}
+
+.arrow-button {
+  position: relative;
+  float: right;
+  right: -45px;
+  text-decoration: none;
+}

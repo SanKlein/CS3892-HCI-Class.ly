@@ -32,6 +32,7 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services', '
     $stateProvider
 
     .state('login', {
+        cache: false,
         url: '/login',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
@@ -67,9 +68,10 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services', '
 
     // setup an abstract state for the tabs directive
         .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'templates/tabs.html'
+          cache: false,
+          url: '/tab',
+          abstract: true,
+          templateUrl: 'templates/tabs.html'
     })
 
     // Each tab has its own nav history stack:
@@ -84,6 +86,12 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services', '
             }
         }
     })
+
+      .state('chatSettings', {
+        cache: false,
+        url: '/chat/setting',
+        templateUrl: 'templates/chatSettings.html'
+      })
 
     .state('tab.meetups', {
         cache: false,

@@ -176,6 +176,7 @@ angular.module('classly.controllers', [])
     $scope.meetups = [];
 
     MeetupFactory.all().then(function(meetups) {
+      console.log('all meetups found');
       console.log(meetups);
       if (meetups) {
         $scope.meetups = meetups;
@@ -184,7 +185,7 @@ angular.module('classly.controllers', [])
 
   }])
 
-  .controller('AddMeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', 'UserFactory', function($rootScope, $scope, GroupFactory, $window, UserFactory) {
+  .controller('AddMeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', 'UserFactory', function($rootScope, $scope, MeetupFactory, $window, UserFactory) {
     $scope.meetup = {
       date: '',
       time: '',
@@ -215,6 +216,8 @@ angular.module('classly.controllers', [])
         course: $rootScope.currentCourse._id,
         group: $rootScope.currentGroup._id
       };
+      console.log('created meetup');
+      console.log(meetup);
 
       MeetupFactory.create(meetup).then(function(group) {
         $window.location.assign('#/tab/meetups');

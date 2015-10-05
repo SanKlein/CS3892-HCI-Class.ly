@@ -16,7 +16,7 @@ var Meetup = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group'
   },
-  title: {
+  time: {
     type: String
   },
   date: {

@@ -1,11 +1,11 @@
 <ion-view view-title="Chat">
-  <ion-header-bar class="bar-stable">
+  <ion-header-bar class="bar-positive">
     <div class="button button-clear">
-      <a class="button button-dark button-clear ion-chevron-left" ui-sref="groups"></a>
+      <a class="button button-clear ion-chevron-left" ui-sref="groups"></a>
     </div>
     <h1 class="title">{{currentGroup.title}} Chat</h1>
     <div class="button button-clear">
-      <a class="button button-dark button-clear ion-gear-a"></a>
+      <a class="button button-clear ion-gear-a" ui-sref="chatSettings"></a>
     </div>
   </ion-header-bar>
   <ion-content>
@@ -15,7 +15,7 @@
         <h2>{{chat.user_username}}</h2>
         <p>{{chat.text}}</p>
         <div class="button button-clear" ng-click="likeChat(chat, $index)">
-          <button class="button button-clear button-stable icon" ng-class="chat.liked ? 'ion-ios-heart' : 'ion-ios-heart-outline'"></button>
+          <button class="button button-clear button-assertive icon" ng-class="chat.liked ? 'ion-ios-heart' : 'ion-ios-heart-outline'"></button>
         </div>
       </div>
     </ion-list>
@@ -26,6 +26,6 @@
         <input class="text-field" type="text" placeholder="Message" ng-model="chatroom.text" autofocus>
       </form>
     </label>
-    <button type="submit" class="button button-dark button-clear" ng-click="addPost()" ng-disabled="!chatroom.text">Send</button>
+    <button type="submit" class="button button-positive button-clear" ng-click="addPost()" ng-disabled="!chatroom.text">Send</button>
   </ion-footer-bar>
 </ion-view>
