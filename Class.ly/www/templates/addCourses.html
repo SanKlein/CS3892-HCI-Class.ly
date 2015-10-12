@@ -5,9 +5,16 @@
     </div>
     <h1 class="title">Course List</h1>
   </ion-header-bar>
+  <ion-header-bar class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper wrapper-color">
+      <i class="ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="course.query">
+      <a class="ion-close" ng-if="course.query" on-touch="course.query=''"></a>
+    </label>
+  </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item class="item item-text-wrap item-button-right" ng-repeat="course in courses track by $index">
+      <ion-item class="item item-text-wrap item-button-right" ng-repeat="course in course.courses | filter: course.query track by $index">
         {{course.title}}
         <button class="button button-clear button-dark" ng-class="course.added ? 'ion-ios-checkmark-empty' : 'ion-ios-plus-empty'" ng-click="addCourse(course, $index)"></button>
       </ion-item>

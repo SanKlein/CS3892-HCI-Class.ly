@@ -58,21 +58,24 @@ angular.module('classly.controllers', [])
   }])
 
   .controller('AddCourseCtrl', ['$rootScope', '$scope', 'CourseFactory', '$window', function($rootScope, $scope, CourseFactory, $window) {
-    $scope.courses = [];
+    $scope.course = {
+      courses: [],
+      query: ''
+    };
 
     CourseFactory.getMyCourses($rootScope.currentUser).then(function(courses) {
       if (courses) {
         for (var i = 0; i < courses.length; i++) {
           (function(index) {
               courses[index].added = false;
-              $scope.courses.push(courses[index]);
+              $scope.course.courses.push(courses[index]);
           })(i);
         }
       }
     });
 
     $scope.addCourse = function(course, index) {
-      $scope.courses[index].added = !course.added;
+      $scope.course.courses[index].added = !course.added;
     };
   }])
 
@@ -152,6 +155,7 @@ angular.module('classly.controllers', [])
     };
 
     $scope.addChat = function() {
+      console.log('add chat clicked');
       var newChat = {
         text: $scope.chatroom.text,
         user_id: $rootScope.currentUser._id,
@@ -161,6 +165,7 @@ angular.module('classly.controllers', [])
       };
 
       ChatFactory.create(newChat).then(function(chat) {
+        console.log(chat);
         if ($scope.chatroom.chats) {
           $scope.chatroom.chats.push(chat);
         } else {
