@@ -19,10 +19,17 @@ div.footer-button a.button.button-full {
   margin:0;
 }
 
+.alert-button {
+  position: fixed;
+  float: right;
+  right: 25px;
+  text-decoration: none;
+}
+
 .arrow-button {
   position: relative;
   float: right;
-  right: -45px;
+  right: -50px;
   text-decoration: none;
 }
 

@@ -1,0 +1,19 @@
+<ion-view view-title="Meetup">
+  <ion-header-bar class="bar bar-positive">
+    <div class="button button-clear">
+      <a class="button button-clear ion-chevron-left" ng-click="goBack()"></a>
+    </div>
+    <h1 class="title">Meetup</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <div class="item">Date: {{meetup.date}}</div>
+      <div class="item">Time: {{meetup.time}}</div>
+      <div class="item">Location: {{meetup.location}}</div>
+      <div class="item item-divider item-course">Classmates</div>
+      <ion-item class="item item-text-wrap item-button-right" ng-repeat="user in meetup.users | limitTo: 3 track by $index">
+        {{user.username}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

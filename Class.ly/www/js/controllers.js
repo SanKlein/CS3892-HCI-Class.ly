@@ -1,16 +1,38 @@
 angular.module('classly.controllers', [])
 
-  .controller('ClasslyCtrl', ['$rootScope', '$ionicSideMenuDelegate', '$window', function($rootScope, $ionicSideMenuDelegate, $window) {
+  .controller('ClasslyCtrl', ['$rootScope', '$ionicSideMenuDelegate', '$window', 'MeetupFactory', function($rootScope, $ionicSideMenuDelegate, $window, MeetupFactory) {
 
-        $rootScope.logout = function() {
-          $rootScope.currentUser = null;
+        $rootScope.currentUser = '';
+        $rootScope.meetups = [];
 
-          $window.location.assign('#/login');
-        };
+          $rootScope.logout = function() {
+              $rootScope.currentUser = null;
 
-        $rootScope.openMenu = function () {
-          $ionicSideMenuDelegate.toggleLeft();
-        };
+              $window.location.assign('#/login');
+          };
+
+          $rootScope.openMenu = function () {
+              $ionicSideMenuDelegate.toggleLeft();
+          };
+
+          MeetupFactory.all().then(function(meetups) {
+              if (meetups) {
+                for (var i = 0; i < meetups.length; i++) {
+                  (function(index) {
+                    $rootScope.meetups.push(meetups[index]);
+                  })(i);
+                }
+              }
+          });
+
+          $rootScope.loadMeetup = function(meetup) {
+              $rootScope.meetup = meetup;
+              $window.location.assign('#/meetup');
+          };
+
+          $rootScope.goBack = function(){
+            $window.history.back();
+          }
 
       }
   ])
@@ -177,7 +199,7 @@ angular.module('classly.controllers', [])
     };
   }])
 
-  .controller('MeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', function($rootScope, $scope, MeetupFactory, $window) {
+  .controller('MeetupsCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', function($rootScope, $scope, MeetupFactory, $window) {
     $scope.meetups = [];
 
     MeetupFactory.all().then(function(meetups) {
@@ -185,6 +207,19 @@ angular.module('classly.controllers', [])
       console.log(meetups);
       if (meetups) {
         $scope.meetups = meetups;
+      }
+    });
+
+  }])
+
+  .controller('MeetupCtrl', ['$rootScope', '$scope', 'MeetupFactory', '$window', 'UserFactory', function($rootScope, $scope, MeetupFactory, $window, UserFactory) {
+    $scope.meetup = [];
+
+    $scope.meetup = $rootScope.meetup;
+
+    UserFactory.all().then(function(users) {
+      if (users) {
+        $scope.meetup.users = users;
       }
     });
 

@@ -99,9 +99,16 @@ angular.module('classly', ['ionic', 'classly.controllers', 'classly.services', '
         views: {
             'tab-meetups': {
                 templateUrl: 'templates/tab-meetups.html',
-                controller: 'MeetupCtrl'
+                controller: 'MeetupsCtrl'
             }
         }
+    })
+
+    .state('meetup', {
+        cache: false,
+        url: '/meetup',
+        templateUrl: 'templates/meetup.html',
+        controller: 'MeetupCtrl'
     })
 
     .state('addMeetup', {

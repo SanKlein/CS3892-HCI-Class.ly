@@ -38,6 +38,10 @@
       <ion-content class="has-header">
         <ion-list>
           <ion-item ng-click="logout()" menu-close>Logout</ion-item>
+          <div class="item item-divider" ng-if="meetups">
+            <p>Meetups</p>
+          </div>
+          <a class="item" ng-repeat="meetup in meetups" ng-click="loadMeetup(meetup)" menu-close="">{{meetup.date}} {{meetup.time}} {{meetup.location}}</a>
         </ion-list>
       </ion-content>
     </ion-side-menu>
