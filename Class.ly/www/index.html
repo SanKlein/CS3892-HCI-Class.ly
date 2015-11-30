@@ -33,15 +33,15 @@
     </ion-side-menu-content>
     <ion-side-menu side="left">
       <ion-header-bar class="bar-positive">
-        <h1 class="title">{{currentUser.username}}</h1>
+        <h1 class="title"><b>{{currentUser.username}}</b></h1>
       </ion-header-bar>
       <ion-content class="has-header">
         <ion-list>
-          <ion-item ng-click="logout()" menu-close>Logout</ion-item>
-          <div class="item item-divider" ng-if="meetups">
-            <p>Meetups</p>
+          <ion-item class="course-title" ng-click="logout()" menu-close><b>Logout</b></ion-item>
+          <div class="item item-divider item-course classmates" ng-if="meetups">
+            <p><b class="meetup-title">Meetups</b></p>
           </div>
-          <a class="item" ng-repeat="meetup in meetups" ng-click="loadMeetup(meetup)" menu-close="">{{meetup.date}} {{meetup.time}} {{meetup.location}}</a>
+          <a class="item" ng-repeat="meetup in meetups" ng-click="loadMeetup(meetup)" menu-close=""><b class="course-title">{{meetup.date}} {{meetup.time}} {{meetup.location}}</b></a>
         </ion-list>
       </ion-content>
     </ion-side-menu>

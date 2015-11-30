@@ -1,21 +1,23 @@
 <ion-view title="Login">
   <ion-header-bar class="bar bar-positive">
-    <h1 class="title">Login</h1>
+    <h1 class="title"><b>Class.ly</b></h1>
   </ion-header-bar>
   <ion-content>
-    <div class="list">
+    <div class="list login-form">
       <form ng-submit="login()">
-        <label class="item item-input">
-          <input type="text" placeholder="Username" ng-model="user.username">
+        <label class="item item-input item-stacked-label login-form">
+          <span class="input-label"><b>Username</b></span>
+          <input type="text" class="login-input" ng-model="user.username">
         </label>
-        <label class="item item-input">
-          <input type="password" placeholder="Password" ng-model="user.password">
+        <label class="item item-input item-stacked-label login-form">
+          <span class="input-label"><b>Password</b></span>
+          <input type="password" class="login-input" ng-model="user.password">
         </label>
-
-        <button class="button button-block button-positive" ng-click="login()" ng-disabled="!user.username || !user.password" type="submit">
-          Login
-        </button>
+        <button class="button button-stable button-full button-clear signup-button">I do not have an account</button>
       </form>
     </div>
   </ion-content>
+  <ion-footer-bar class="bar bar-positive bar-footer footer-button">
+    <a class="button button-full button-clear button-footer" ng-click="login()" ng-disabled="!user.username || !user.password" type="submit"><b>Login</b></a>
+  </ion-footer-bar>
 </ion-view>

@@ -3,32 +3,32 @@
     <div class="button button-clear">
       <a class="button button-clear ion-chevron-left" ui-sref="tab.meetups"></a>
     </div>
-    <h1 class="title">New Meetup</h1>
+    <h1 class="title"><b>New Meetup</b></h1>
   </ion-header-bar>
   <ion-content>
     <ion-list>
       <label class="item item-input">
-        <span class="input-label">Date</span>
-        <input class="text-field" type="text" placeholder="MM/DD/YYYY" ng-model="meetup.date">
+        <span class="input-label"><b>Date</b></span>
+        <input class="text-field meetup-input" type="text" placeholder="MM/DD/YYYY" ng-model="meetup.date">
       </label>
       <label class="item item-input">
-        <span class="input-label">Time</span>
-        <input class="text-field" type="text" placeholder= "HH:MM" ng-model="meetup.time">
+        <span class="input-label"><b>Time</b></span>
+        <input class="text-field meetup-input" type="text" placeholder= "HH:MM" ng-model="meetup.time">
       </label>
       <label class="item item-input">
-        <span class="input-label">Location</span>
-        <input class="text-field" type="text" ng-model="meetup.location">
+        <span class="input-label"><b>Location</b></span>
+        <input class="text-field meetup-input" type="text" ng-model="meetup.location">
       </label>
-      <ion-item class="item-divider item-course">
-        Add Classmates
+      <ion-item class="item-divider item-course classmates">
+        <b>Add Classmates</b>
       </ion-item>
-      <ion-item class="item item-text-wrap item-button-right" ng-repeat="user in meetup.users track by $index">
-        {{user.username}}
-        <button class="button button-clear button-dark" ng-class="user.added ? 'ion-ios-checkmark-empty' : 'ion-ios-plus-empty'" ng-click="addUser(user, $index)"></button>
+      <ion-item class="item item-text-wrap item-button-right course-title" ng-repeat="user in meetup.users track by $index">
+        <b>{{user.username}}</b>
+        <button class="button button-clear icon" ng-class="user.added ? 'ion-close button-assertive' : 'ion-plus button-balanced'" ng-click="addUser(user, $index)"></button>
       </ion-item>
     </ion-list>
   </ion-content>
-  <div class="bar bar-positive bar-footer footer-button">
-    <a class="button button-full button-clear" ng-click="createMeetup()" ui-sref="tab.meetups" ng-disabled="!meetup.date || !meetup.time || !meetup.location">Create Meetup</a>
-  </div>
+  <ion-footer-bar class="bar bar-positive bar-footer footer-button">
+    <a class="button button-full button-clear button-footer" ng-click="createMeetup()" ui-sref="tab.meetups" ng-disabled="!meetup.date || !meetup.time || !meetup.location"><b>Create Meetup</b></a>
+  </ion-footer-bar>
 </ion-view>

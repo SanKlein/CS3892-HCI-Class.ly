@@ -1,21 +1,18 @@
 <ion-view view-title="Courses">
   <ion-header-bar class="bar bar-positive">
     <div class="button button-clear">
-      <button ng-click="openMenu()" class="button button-clear ion-navicon-round"></button>
+      <button ng-click="openMenu()" class="button button-clear ion-navicon"></button>
     </div>
-    <h1 class="title">My Courses</h1>
+    <h1 class="title"><b>My Courses</b></h1>
     <div class="button button-clear">
-      <a class="button button-clear ion-plus-round" ui-sref="addCourses"></a>
+      <a class="button button-clear ion-plus" ui-sref="addCourses"></a>
     </div>
   </ion-header-bar>
   <ion-content>
     <ion-list can-swipe="true" show-delete="false">
-      <ion-item class="item item-text-wrap" ng-repeat="course in courses track by $index">
-        <a class="button button-clear button-dark" ng-click="loadCourse(course)" href="#/groups">
-          {{course.title}}
-        </a>
-        <a ng-if="course.title == 'Human-Computer Interaction'" class="ion-chatbubble icon alert-button button button-clear button-assertive"></a>
-        <a class="ion-ios-arrow-right arrow-button button button-clear button-dark" ng-click="loadCourse(course)" href="#/groups"></a>
+      <ion-item class="item item-text-wrap" ng-repeat="course in courses track by $index" ng-click="loadCourse(course)">
+        <b class="course-title">{{course.title}}</b>
+        <a class="arrow-button button button-clear icon" ng-class="course.title == 'Human-Computer Interaction' ? 'ion-chatbubble button-assertive' : 'ion-chevron-right button-positive'"></a>
         <ion-option-button class="button-assertive" ng-click="remove(course, $index)">
           Remove
         </ion-option-button>

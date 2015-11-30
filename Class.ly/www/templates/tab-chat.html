@@ -3,7 +3,7 @@
     <div class="button button-clear">
       <a class="button button-clear ion-chevron-left" ui-sref="groups"></a>
     </div>
-    <h1 class="title">{{currentGroup.title}} Chat</h1>
+    <h1 class="title"><b>{{currentGroup.title}} Chat</b></h1>
     <div class="button button-clear">
       <a class="button button-clear ion-gear-a" ui-sref="chatSettings"></a>
     </div>
@@ -12,10 +12,10 @@
     <ion-list>
       <div class="item item-button-right item-avatar item-text-wrap" ng-repeat="chat in chatroom.chats track by $index">
         <img class="img-circle" src="img/classly.jpg"> <!--ng-src="{{post.profilePicture}}"-->
-        <h2>{{chat.user_username}}</h2>
-        <p>{{chat.text}}</p>
+        <h2><b>{{chat.user_username}}</b></h2>
+        <p><b>{{chat.text}}</b></p>
         <div class="button button-clear" ng-click="likeChat(chat, $index)">
-          <button class="button button-clear button-assertive icon" ng-class="chat.liked ? 'ion-ios-heart' : 'ion-ios-heart-outline'"></button>
+          <button class="button button-clear icon like-button" ng-class="chat.liked ? 'ion-thumbsup button-positive' : 'ion-thumbsup button-stable'"></button>
         </div>
       </div>
     </ion-list>
@@ -23,9 +23,9 @@
   <ion-footer-bar class="bar-stable item-input-inset">
     <label class="item-input-wrapper">
       <form ng-submit="addChat()" class="text-input">
-        <input class="text-field" type="text" placeholder="Message" ng-model="chatroom.text" autofocus>
+        <input class="text-field meetup-input" type="text" placeholder="Message" ng-model="chatroom.text" autofocus>
       </form>
     </label>
-    <button type="submit" class="button button-positive button-clear" ng-click="addChat()" ng-disabled="!chatroom.text">Send</button>
+    <button type="submit" class="button button-positive button-clear" ng-click="addChat()" ng-disabled="!chatroom.text"><b>Send</b></button>
   </ion-footer-bar>
 </ion-view>

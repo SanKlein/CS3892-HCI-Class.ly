@@ -3,16 +3,17 @@
     <div class="button button-clear">
       <a class="button button-clear ion-chevron-left" ui-sref="groups"></a>
     </div>
-    <h1 class="title">{{currentGroup.title}} Meetups</h1>
+    <h1 class="title"><b>{{currentGroup.title}} Meetups</b></h1>
     <div class="button button-clear">
-      <a class="button button-clear ion-plus-round" ui-sref="addMeetup"></a>
+      <a class="button button-clear ion-plus" ui-sref="addMeetup"></a>
     </div>
   </ion-header-bar>
   <ion-content>
     <ion-list>
       <ion-list>
         <a class="item item-text-wrap" ng-repeat="meetup in meetups track by $index" ng-click="loadMeetup(meetup)">
-          {{meetup.location}}  {{meetup.date}}  {{meetup.time}}
+          <b class="course-title">{{meetup.location}}  {{meetup.date}}  {{meetup.time}}</b>
+          <div class="button button-clear button-positive load-meetup ion-chevron-right icon"></div>
         </a>
       </ion-list>
     </ion-list>
